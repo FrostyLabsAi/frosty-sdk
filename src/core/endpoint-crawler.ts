@@ -225,10 +225,15 @@ export class EndpointCrawler {
       }
 
       // Try multiple well-known paths for A2A agent cards
+      // Per ERC-8004, endpoint may already be full URL to agent card
+      // Per A2A spec section 5.3, recommended discovery path is /.well-known/agent-card.json
       const agentcardUrls = [
-        `${endpoint}/agentcard.json`,
-        `${endpoint}/.well-known/agent.json`,
+        endpoint, // Try exact URL first (ERC-8004 format: full path to agent card)
+        `${endpoint}/.well-known/agent-card.json`, // Spec-recommended discovery path
+        `${endpoint.replace(/\/$/, '')}/.well-known/agent-card.json`,
+        `${endpoint}/.well-known/agent.json`, // Alternative well-known path
         `${endpoint.replace(/\/$/, '')}/.well-known/agent.json`,
+        `${endpoint}/agentcard.json`, // Legacy path
       ];
 
       for (const agentcardUrl of agentcardUrls) {
@@ -241,8 +246,8 @@ export class EndpointCrawler {
           if (response.ok) {
             const data = await response.json();
 
-            // Extract skills from agentcard
-            const skills = this._extractList(data, 'skills');
+            // Extract skill tags from agentcard
+            const skills = this._extractA2aSkills(data);
 
             if (skills && skills.length > 0) {
               return { a2aSkills: skills };
@@ -258,6 +263,69 @@ export class EndpointCrawler {
     }
 
     return null;
+  }
+
+  /**
+   * Extract skill tags from A2A agent card.
+   *
+   * Per A2A Protocol spec (v0.3.0), agent cards should have:
+   *   skills: AgentSkill[] where each AgentSkill has a tags[] array
+   *
+   * This method also handles non-standard formats for backward compatibility:
+   * - detailedSkills[].tags[] (custom extension)
+   * - skills: ["tag1", "tag2"] (non-compliant flat array)
+   */
+  private _extractA2aSkills(data: any): string[] {
+    const result: string[] = [];
+
+    // Try spec-compliant format first: skills[].tags[]
+    if ('skills' in data && Array.isArray(data.skills)) {
+      for (const skill of data.skills) {
+        if (skill && typeof skill === 'object' && 'tags' in skill) {
+          // Spec-compliant: AgentSkill object with tags
+          const tags = skill.tags;
+          if (Array.isArray(tags)) {
+            for (const tag of tags) {
+              if (typeof tag === 'string') {
+                result.push(tag);
+              }
+            }
+          }
+        } else if (typeof skill === 'string') {
+          // Non-compliant: flat string array (fallback)
+          result.push(skill);
+        }
+      }
+    }
+
+    // Fallback to detailedSkills if no tags found in skills
+    // (custom extension used by some implementations)
+    if (result.length === 0 && 'detailedSkills' in data && Array.isArray(data.detailedSkills)) {
+      for (const skill of data.detailedSkills) {
+        if (skill && typeof skill === 'object' && 'tags' in skill) {
+          const tags = skill.tags;
+          if (Array.isArray(tags)) {
+            for (const tag of tags) {
+              if (typeof tag === 'string') {
+                result.push(tag);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Remove duplicates while preserving order
+    const seen = new Set<string>();
+    const uniqueResult: string[] = [];
+    for (const item of result) {
+      if (!seen.has(item)) {
+        seen.add(item);
+        uniqueResult.push(item);
+      }
+    }
+
+    return uniqueResult;
   }
 
   /**
