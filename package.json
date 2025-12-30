@@ -8,9 +8,11 @@
   "scripts": {
     "codegen": "graphql-codegen --config codegen.yml",
     "postinstall": "npm run codegen",
-    "prebuild": "npm run codegen",
+    "generate:taxonomies": "node ./scripts/generate-taxonomies.mjs",
+    "prebuild": "npm run codegen && npm run generate:taxonomies",
     "build": "tsc",
     "build:watch": "tsc --watch",
+    "pretest": "npm run generate:taxonomies",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -69,7 +71,7 @@
     "typescript": "^5.3.3"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "overrides": {
     "nanoid": "^5.1.6",
