@@ -1,5 +1,5 @@
 /**
- * Feedback management system for Agent0 SDK
+ * Feedback management system for Frosty SDK
  */
 
 import { ethers } from 'ethers';
@@ -26,7 +26,7 @@ export interface FeedbackAuth {
 }
 
 /**
- * Manages feedback operations for the Agent0 SDK
+ * Manages feedback operations for the Frosty SDK
  */
 export class FeedbackManager {
   private getSubgraphClientForChain?: (chainId?: number) => SubgraphClient | undefined;

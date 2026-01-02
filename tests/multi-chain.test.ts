@@ -13,21 +13,24 @@
 import { SDK } from '../src/index.js';
 import { CHAIN_ID, RPC_URL, printConfig } from './config.js';
 
-// Supported chains for multi-chain testing
-const SUPPORTED_CHAINS = [11155111, 84532, 80002]; // ETH Sepolia, Base Sepolia, Polygon Amoy
+// Supported chains for multi-chain testing (ERC-8004 v1.0 ChaosChain networks)
+// Note: Only 11155111 and 84532 have subgraph support for legacy contracts
+const SUPPORTED_CHAINS = [11155111, 84532]; // ETH Sepolia, Base Sepolia (have subgraphs)
+// Additional v1.0 chains (no subgraph yet): 11155420 (OP Sepolia), 919 (Mode), 16602 (0G)
 
 // Known test agents with feedback (from discovery script)
 // These are agents that are known to have feedback entries
+// Note: These are for legacy v0.4 contracts - v1.0 agents may differ
 const TEST_AGENTS_WITH_FEEDBACK: Record<number, string[]> = {
-  11155111: ['11155111:1377', '11155111:1340'], // Both have feedback
-  84532: ['84532:557', '84532:545', '84532:543', '84532:541', '84532:540', '84532:539', '84532:538', '84532:536'], // All have feedback and averageScore=5.0
+  11155111: ['11155111:1377', '11155111:1340'], // Both have feedback (legacy v0.4)
+  84532: ['84532:557', '84532:545', '84532:543', '84532:541', '84532:540', '84532:539', '84532:538', '84532:536'], // All have feedback and averageScore=5.0 (legacy v0.4)
 };
 
 // Known agents with reputation (averageScore) for reputation search tests
+// Note: These are for legacy v0.4 contracts
 const TEST_AGENTS_WITH_REPUTATION: Record<number, string[]> = {
   11155111: [], // No agents with calculated averageScore on this chain
-  84532: ['84532:557', '84532:545', '84532:543', '84532:541', '84532:540', '84532:539', '84532:538', '84532:536'], // All have averageScore=5.0
-  80002: [], // No agents with reputation on this chain
+  84532: ['84532:557', '84532:545', '84532:543', '84532:541', '84532:540', '84532:539', '84532:538', '84532:536'], // All have averageScore=5.0 (legacy v0.4)
 };
 
 // Known tags that exist in feedback data
@@ -345,11 +348,9 @@ describe('Multi-Chain Agent Operations', () => {
       console.log('-'.repeat(60));
       console.log('Testing with chain combinations...');
 
-      // Test with 2 chains
+      // Test with 2 chains (only chains with subgraph support)
       const chainPairs = [
         [11155111, 84532],
-        [11155111, 80002],
-        [84532, 80002],
       ];
 
       for (const chains of chainPairs) {

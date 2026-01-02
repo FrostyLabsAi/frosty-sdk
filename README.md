@@ -1,10 +1,10 @@
-# Agent0 SDK
+# Frosty SDK
 
-Agent0 is the TypeScript SDK for agentic economies. It enables agents to register, advertise their capabilities and how to communicate with them, and give each other feedback and reputation signals. All this using blockchain infrastructure (ERC-8004) and decentralized storage, enabling permissionless discovery without relying on proprietary catalogues or intermediaries.
+Frosty SDK is FrostyLabs' TypeScript SDK for ERC-8004 based agents
 
-## What Does Agent0 SDK Do?
+## What Does Frosty SDK Do?
 
-Agent0 SDK v0.31 enables you to:
+Frosty SDK enables you to:
 
 - **Create and manage agent identities** - Register your AI agent on-chain with a unique identity, configure presentation fields (name, description, image), set wallet addresses, and manage trust models with x402 support
 - **Advertise agent capabilities** - Publish MCP and A2A endpoints, with automated extraction of MCP tools and A2A skills from endpoints
@@ -16,9 +16,9 @@ Agent0 SDK v0.31 enables you to:
 
 ## ⚠️ Alpha Release
 
-Agent0 SDK v0.31 is in **alpha** with bugs and is not production ready. We're actively testing and improving it.
+Frosty SDK v0.31 is in **alpha** with bugs and is not production ready. We're actively testing and improving it.
 
-**Bug reports & feedback:** GitHub: [Report issues](https://github.com/agent0lab/agent0-ts/issues) | Telegram: [@marcoderossi](https://t.me/marcoderossi) | Email: marco.derossi@consensys.net
+**Bug reports & feedback:** GitHub: [Report issues](https://github.com/frostylabsai/frosty-sdk/issues) | X: [@frostylabsai](https://x.com/frostylabsai) | Email: frosty@frostylabs.ai
 
 ## Installation
 
@@ -33,20 +33,20 @@ Agent0 SDK v0.31 is in **alpha** with bugs and is not production ready. We're ac
 ### Install from npm
 
 ```bash
-npm install agent0-sdk
+npm install frosty-sdk
 ```
 
 **Note:** This package is an ESM (ECMAScript Module) package. Use `import` statements in your code:
 
 ```typescript
-import { SDK } from 'agent0-sdk';
+import { SDK } from 'frosty-sdk';
 ```
 
 ### Install from Source
 
 ```bash
-git clone https://github.com/agent0lab/agent0-ts.git
-cd agent0-ts
+git clone https://github.com/frostylabsai/frosty-sdk.git
+cd frosty-sdk
 npm install
 npm run build
 ```
@@ -58,7 +58,7 @@ npm run build
 ### 1. Initialize SDK
 
 ```typescript
-import { SDK } from 'agent0-sdk';
+import { SDK } from 'frosty-sdk';
 
 // Initialize SDK with IPFS and subgraph
 const sdk = new SDK({
@@ -272,7 +272,11 @@ The SDK supports querying agents across multiple blockchain networks:
 
 - **Ethereum Sepolia** (Chain ID: `11155111`)
 - **Base Sepolia** (Chain ID: `84532`)
-- **Polygon Amoy** (Chain ID: `80002`)
+- **Optimism Sepolia** (Chain ID: `11155420`)
+- **Mode Testnet** (Chain ID: `919`)
+- **0G Testnet (Galileo)** (Chain ID: `16602`)
+
+> **Note:** All networks use the same deterministic ERC-8004 v1.0 contract addresses from [ChaosChain](https://github.com/ChaosChain/trustless-agents-erc-ri).
 
 ### Chain-Agnostic Agent IDs
 
@@ -443,6 +447,4 @@ Full documentation is available at [sdk.ag0.xyz](https://sdk.ag0.xyz), including
 
 ## License
 
-Agent0 SDK is MIT-licensed public good brought to you by Marco De Rossi in collaboration with Consensys, 🦊 MetaMask and Agent0, Inc. We are looking for co-maintainers. Please reach out if you want to help.
-
-Thanks also to Edge & Node (The Graph), Protocol Labs and Pinata for their support.
+Frosty SDK is MIT-licensed 

@@ -1,6 +1,6 @@
 # TypeScript SDK API Reference
 
-Complete function signature reference for the Agent0 TypeScript SDK.
+Complete function signature reference for the Frosty TypeScript SDK.
 
 ## SDK Class (`SDK`)
 

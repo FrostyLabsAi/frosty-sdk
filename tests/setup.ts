@@ -1,5 +1,5 @@
 /**
- * Jest setup file for Agent0 SDK tests.
+ * Jest setup file for Frosty SDK tests.
  * Configures logging and test environment.
  */
 

@@ -1,5 +1,5 @@
 /**
- * Shared constants for Agent0 SDK
+ * Shared constants for Frosty SDK
  */
 
 /**

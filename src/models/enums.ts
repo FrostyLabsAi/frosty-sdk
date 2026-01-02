@@ -1,5 +1,5 @@
 /**
- * Enums for Agent0 SDK
+ * Enums for Frosty SDK
  */
 
 /**

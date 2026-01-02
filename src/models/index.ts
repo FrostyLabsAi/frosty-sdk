@@ -1,5 +1,5 @@
 /**
- * Agent0 SDK Models
+ * Frosty SDK Models
  * Re-exports all types, interfaces, and enums
  */
 

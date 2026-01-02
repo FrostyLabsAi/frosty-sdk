@@ -1,5 +1,5 @@
 /**
- * Agent0 TypeScript SDK
+ * Frosty TypeScript SDK
  * Main entry point - exports public API
  */
 

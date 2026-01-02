@@ -10,7 +10,7 @@ import { SDK } from '../src/index';
 import { ethers } from 'ethers';
 
 async function main() {
-  console.log('=== Agent0 SDK - Signer Configuration Methods ===\n');
+  console.log('=== Frosty SDK - Signer Configuration Methods ===\n');
 
   // ========================================
   // Method 1: Using a private key string

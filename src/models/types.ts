@@ -1,5 +1,5 @@
 /**
- * Type aliases for Agent0 SDK
+ * Type aliases for Frosty SDK
  */
 
 // AgentId format: "chainId:tokenId" (e.g., "8453:1234") or just tokenId when chain is implicit

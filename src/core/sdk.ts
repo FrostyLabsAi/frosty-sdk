@@ -1,5 +1,5 @@
 /**
- * Main SDK class for Agent0
+ * Main SDK class for Frosty
  */
 
 import { ethers } from 'ethers';
@@ -47,7 +47,7 @@ export interface SDKConfig {
 }
 
 /**
- * Main SDK class for Agent0
+ * Main SDK class for Frosty
  */
 export class SDK {
   private readonly _web3Client: Web3Client;

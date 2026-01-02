@@ -1,5 +1,5 @@
 {
-  "name": "agent0-sdk",
+  "name": "frosty-sdk",
   "version": "0.31.0",
   "description": "TypeScript SDK for agent portability, discovery and trust based on ERC-8004",
   "type": "module",
@@ -28,15 +28,15 @@
     "ipfs",
     "reputation"
   ],
-  "author": "Marco De Rossi <marco.derossi@consensys.net>",
+  "author": "FrostyLabs <@frostylabsai>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/agent0lab/agent0-ts"
+    "url": "https://github.com/frostylabsai/frosty-sdk"
   },
-  "homepage": "https://sdk.ag0.xyz",
+  "homepage": "https://frostylabs.ai",
   "bugs": {
-    "url": "https://github.com/agent0lab/agent0-ts/issues"
+    "url": "https://github.com/frostylabai/frosty-sdk/issues"
   },
   "files": [
     "dist/**/*",

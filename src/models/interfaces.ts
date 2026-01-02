@@ -1,5 +1,5 @@
 /**
- * Core interfaces for Agent0 SDK
+ * Core interfaces for Frosty SDK
  */
 
 import type { AgentId, Address, URI, Timestamp } from './types.js';
